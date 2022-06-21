@@ -9,8 +9,43 @@ import React from 'react';
 import { Formik, Form } from 'formik';
 import { TextField } from './TextField';
 import * as Yup from 'yup';
+import axios  from "axios";
+import { useState } from "react";
+
+
+
 
 const Register = () => {
+
+  const [firstName,setFirstName] = useState('');
+  const [lastName,setLastName] = useState('');
+  const [email,setEmail] = useState('');
+  const [password,setPassword] = useState('');
+  const [confirmPassword,setConfirmPassword] = useState('');
+
+
+
+  
+const handlesubmit =(e) => {
+  e.preventDefault()
+  axios.post(
+    'http://localhost:8000/users',
+    {
+      firstName: firstName,
+      lastName:lastName,
+      email: email,
+      password: password ,
+      confirmPassword: confirmPassword
+    }
+  )
+  .then((res) =>{
+    console.log(res)
+  })
+  .catch((err) => {
+    console.log(err)
+  })
+}
+
   const validate = Yup.object({
     firstName: Yup.string()
       .max(15, 'Must be 15 characters or less')
@@ -53,13 +88,34 @@ const Register = () => {
                 <img src={profile} alt="profile" className="profile" />
                 </div> </div> <div>
             <h1>Registration </h1>
-          <Form>
+          <Form onSubmit={handlesubmit}>
           <div className="second-input">
-            <TextField label="First Name" name="firstName" className="name" type="text" /> &nbsp;
-            <TextField label="Last Name" name="lastName" className="name" type="text" /> &nbsp;
-            <TextField label="Email" name="email" type="email" className="name"/>&nbsp;
-            <TextField label="password" name="password" type="password" className="name" />&nbsp;
-            <TextField label="Confirm Password" name="confirmPassword" type="password" className="name"/>&nbsp;
+            <TextField label="First Name" name="firstName" value={firstName} onChange={
+              (e) => {
+                setFirstName(e.target.value)
+              }
+            }
+            className="name" type="text" /> &nbsp;
+            <TextField label="Last Name" name="lastName" value={lastName} onChange={
+              (e) => {
+                setLastName(e.target.value)
+              }
+            } className="name" type="text" /> &nbsp;
+            <TextField label="Email" name="email" type="email" value={email} onChange={
+              (e) => {
+                setEmail(e.target.value)
+              }
+            }className="name"/>&nbsp;
+            <TextField label="password" name="password" type="password" value={password} onChange={
+              (e) => {
+                setPassword(e.target.value)
+              }
+            } className="name" />&nbsp;
+            <TextField label="Confirm Password" name="confirmPassword" value={confirmPassword} onChange={
+              (e) => {
+                setConfirmPassword(e.target.value)
+              }
+            } type="password" className="name"/>&nbsp;
             <div ><button className="login-button" type="submit">Register</button></div>&nbsp;
             <div ><button className="login-button" type="reset">Reset</button></div>
             </div>
