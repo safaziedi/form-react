@@ -1,10 +1,6 @@
 
 import "./Login.css";
 import profile from "./../image/gamer.png";
-import email from "./../image/email.jpg";
-import passWORD from "./../image/pass.png";
-import pass from "./../image/pass.png";
-import { useNavigate } from "react-router-dom";
 import React from 'react';
 import { Formik, Form } from 'formik';
 import { TextField } from './TextField';
