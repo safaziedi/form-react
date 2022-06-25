@@ -5,7 +5,6 @@ const Home =()=> {
   return (
     <div>
         <p  style={{fontSize: 25}}>Home page</p>
-        <button >submit</button>
     </div>
   )
 }
