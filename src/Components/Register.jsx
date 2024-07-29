@@ -10,7 +10,6 @@ import { useState } from "react";
 
 
 
-
 const Register = () => {
 
   const [firstName,setFirstName] = useState('');
@@ -19,13 +18,10 @@ const Register = () => {
   const [password,setPassword] = useState('');
   const [confirmPassword,setConfirmPassword] = useState('');
 
-
-
-  
 const handlesubmit =(e) => {
   e.preventDefault()
   axios.post(
-    'http://localhost:8000/users',
+    'http://localhost:8000/register',
     {
       firstName: firstName,
       lastName:lastName,
@@ -59,6 +55,7 @@ const handlesubmit =(e) => {
       .oneOf([Yup.ref('password'), null], 'Password must match')
       .required('Confirm password is required'),
   })
+
   return (
     <Formik
       initialValues={{
